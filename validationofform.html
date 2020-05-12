@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Validating Forms with JS</title>
+	<style type="text/css">
+	div > form >  ul > li > p{
+		 float: right;
+		 margin-right: 90%;
+		 left:10px;
+		 color:red;
+	}
+	div > form >  ul > li{
+		 list-style-type: none;
+	}
+</style>
+
+</head>
+
+<body>
+ <div>
+<form action="processData.html" onsubmit="return validateData();">
+	<ul>
+	 <li><input type="text" id="userName" placeholder="Your Name"><p id="validate1"></p></li><br>
+	 <li><input type="text" id="userAddress" placeholder="Your Address"><p id="validate2"></p></li><br>
+	 <li><input type="text" id="userPhone" placeholder="Your Phone"><p id="validate3"></p></li><br>
+	
+	 <li><input type="radio" name="check">Male</input>
+	     <input type="radio" name="check">Female</input><p id="validate4"></p></li>
+	  <li><input type="checkbox" name="cardholder">AadharCard</input>
+	  	  <input type="checkbox" name="cardholder">PanCard</input>
+	  	  <input type="checkbox" name="cardholder">DL</input><p id="validate5"></p></li>
+	  <li><select id="languages" multiple limit=2>
+	  	   <option></option>
+	  	   <option>Kannada</option>
+	  	   <option>English</option>
+	  	   <option>Hindi</option>
+	  	   <option>Tamil</option>
+	  	   <option>Telugu</option>
+	    </select><p id="validate6"></p></li>
+	   <li><input type="submit" value="REGISTER"></li>
+
+	</ul>
+</form>
+ 
+ 
+ </div>
+
+
+
+
+<script type="text/javascript">
+	function validateData(){
+		var userName = document.getElementById("userName");
+		var userAddress = document.getElementById("userAddress");
+		var userPhone = document.getElementById("userPhone");
+		var validate1=document.getElementById("validate1");
+		var validate2=document.getElementById("validate2");
+		var validate3=document.getElementById("validate3");
+		var validate4=document.getElementById("validate4");
+        var validate5=document.getElementById("validate5");
+
+		var radio=document.querySelector('input[name="check"]:checked');
+		var check=document.querySelector('input[type="checkbox"]:checked');
+		var languages=document.getElementById("languages");
+		if(userName.value == ""){
+		    validate1.innerHTML="Name shouldn't be left blank";
+
+			userName.focus();
+			return false;
+		}
+		else if(!isNaN(userName.value)){
+			//alert("Names can't include digits");
+			  validate1.innerHTML="Names shouldn't include  numbers";
+			userName.value = "";
+			userName.focus();
+			return false;
+		}
+		else if(!userAddress.value.length){
+			//alert("Please Enter the Address");
+			validate2.innerHTML="Please Enter the Address";
+			userAddress.focus();
+			return false;
+		}
+
+		else if(!userPhone.value.length){
+			//alert("Phone Number is required");
+			validate3.innerHTML="Phone Number is required";
+			userPhone.focus();
+			return false;
+		}
+		else if(isNaN(userPhone.value)){
+			//alert("Please enter the correct phone number");
+			validate3.innerHTML="Please enter the correct phone number";
+			userPhone.value = "";
+			userPhone.focus();
+			return false;
+		}
+		else if(radio==null){
+
+			validate4.innerHTML="Gender should be selected";
+			validate4.focus();
+			return false;
+		}
+		else if(check==null){
+			validate5.innerHTML="AnyOne Id has to be selected";
+			 validate5.focus;
+			 return false;
+		}
+        else if(languages.value="please select any languages"){
+        	validate6.innerHTML="languages has to be selected";
+        	validate6.focus;
+        	return false;
+
+        }
+		return true;
+
+
+
+
+
+
+
+
+
+
+
+
+
+	}
+</script>
+
+</body>
+</html>
